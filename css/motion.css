@@ -24,6 +24,7 @@
 
   .button { transition: background-color 150ms ease, transform 150ms ease; }
   .button:active { transform: translateY(1px); }
+  .blog-card { transition: border-color 200ms ease, box-shadow 200ms ease; }
   .service-card-link,
   .service-card-action { transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease; }
   .service-card-link { transition-property: background-color, color, border-color, translate; }
@@ -32,6 +33,22 @@
   .service-card-link:focus-visible { translate: 0 -.25rem; }
   .faq summary::before { transition: transform 180ms var(--reveal-ease); }
   .faq summary::after { transition: background-color 180ms ease; }
+
+  @supports selector(details::details-content) {
+    .faq details::details-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition: grid-template-rows 280ms ease, opacity 180ms ease,
+        content-visibility 280ms allow-discrete;
+    }
+    .faq details[open]::details-content { grid-template-rows: 1fr; opacity: 1; }
+    .faq-answer { min-height: 0; overflow: clip; }
+  }
+
+  @supports not selector(details::details-content) {
+    .faq details[open] .faq-answer { animation: fade-rise 280ms var(--reveal-ease) both; }
+  }
 
   @media (max-width: 42rem) {
     :root { --reveal-distance: .625rem; }
