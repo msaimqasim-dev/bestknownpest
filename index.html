@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Best Known Pest &amp; Wildlife provides residential pest control and humane wildlife removal in Tewksbury, Middlesex County, MA, and beyond.">
   <title>Best Known Pest &amp; Wildlife | Tewksbury, MA</title>
-  <link rel="icon" href="assets/icons/experience-beetle.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/images/best-known-logo.webp" type="image/png">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
@@ -16,10 +16,13 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="page">
     <header class="hero" id="home">
+      <div class="hero-media" aria-hidden="true">
+        <video class="hero-video" src="assets/videos/hero-pest.mp4" poster="assets/images/hero-video-poster.jpg" preload="none" muted loop playsinline></video>
+      </div>
       <div class="site-header-slot">
         <div class="site-header">
           <a class="brand" href="#home" aria-label="Best Known Pest and Wildlife home">
-            <img src="assets/icons/brand-beetle.svg" width="22" height="27" alt="">
+            <img src="assets/images/best-known-logo.png" width="52" height="52" alt="">
             <span><small>Best Known</small>Pest &amp; Wildlife</span>
           </a>
           <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" hidden>
@@ -62,6 +65,7 @@
           <div class="actions">
             <a class="button" href="#contact">Request an Inspection <img src="assets/icons/arrow-right.svg" alt="" width="18" height="18"></a>
             <a class="button hero-phone call-link" href="tel:+17813331998">Call (781) 333-1998</a>
+            <button class="hero-video-toggle" type="button" aria-label="Play background video" hidden></button>
           </div>
         </div>
         <a class="hero-card" href="#services" aria-label="Explore Best Known Pest &amp; Wildlife services">
@@ -78,7 +82,6 @@
       <section id="services" aria-labelledby="services-title">
         <div class="section-heading">
           <h2 id="services-title">Find Help for Your Pest Problem</h2>
-          <button class="service-marquee-toggle" type="button" aria-controls="service-marquee" hidden>Pause</button>
         </div>
         <div class="service-marquee" id="service-marquee">
           <div class="service-marquee-track">
@@ -165,7 +168,13 @@
           <img class="collage-tall" src="assets/images/technician-inspection.jpg" alt="Technician inspecting wood in protective gear" width="319" height="413" loading="lazy" decoding="async">
           <img src="assets/images/technician-treatment.jpg" alt="" width="386" height="301" loading="lazy" decoding="async">
           <img src="assets/images/beetle-on-leaf.jpg" alt="" width="386" height="301" loading="lazy" decoding="async">
-          <div class="collage-mark" aria-hidden="true"><img src="assets/icons/experience-beetle.svg" alt="" width="42" height="42"></div>
+          <div class="collage-mark" role="img" aria-label="25 plus years of experience">
+            <svg class="experience-ring" viewBox="0 0 200 200" aria-hidden="true">
+              <defs><path id="experience-ring-path" d="M100 23a77 77 0 1 1 0 154 77 77 0 1 1 0-154"/></defs>
+              <text textLength="478" lengthAdjust="spacing"><textPath href="#experience-ring-path">25 plus years of experience - 25 plus years of experience - </textPath></text>
+            </svg>
+            <img src="assets/icons/experience-beetle.svg" alt="" width="38" height="39">
+          </div>
         </div>
         <div class="prose">
           <h2 id="company-title">What Happens When You Call</h2>
@@ -268,7 +277,7 @@
         <div class="blog-grid">
           <article class="blog-card blog-feature" data-reveal="group">
             <a href="https://bestknownpest.com/how-best-known-pest-wildlife-removes-squirrels-from-homes-in-wilbraham-ma/">
-              <img src="assets/images/blog-squirrel.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
+              <span class="blog-image"><img src="assets/images/blog-squirrel.jpg" width="445" height="360" alt="" loading="lazy" decoding="async"></span>
               <div class="blog-copy">
                 <h3>How Best Known Pest &amp; Wildlife Removes Squirrels From Homes in Wilbraham MA</h3>
                 <p><time datetime="2026-09-04">Sep 4, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
@@ -278,7 +287,7 @@
           <div class="blog-column blog-column-pair" data-reveal="group">
             <article class="blog-card">
               <a href="https://bestknownpest.com/how-to-keep-raccoons-away-from-your-house/">
-                <img src="assets/images/blog-raccoon.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
+                <span class="blog-image"><img src="assets/images/blog-raccoon.jpg" width="445" height="360" alt="" loading="lazy" decoding="async"></span>
                 <div class="blog-copy">
                   <h3>How to Keep Raccoons Away From Your House in Andover, MA: 12 Proven Prevention Methods</h3>
                   <p><time datetime="2026-10-01">Oct 1, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
@@ -287,7 +296,7 @@
             </article>
             <article class="blog-card">
               <a href="https://bestknownpest.com/how-fast-can-a-mice-exterminator-solve-an-infestation/">
-                <img src="assets/images/blog-mouse.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
+                <span class="blog-image"><img src="assets/images/blog-mouse.jpg" width="445" height="360" alt="" loading="lazy" decoding="async"></span>
                 <div class="blog-copy">
                   <h3>How Fast Can a Mice Exterminator Solve an Infestation in Your North Andover Home?</h3>
                   <p><time datetime="2026-08-01">Aug 1, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
@@ -298,7 +307,7 @@
           <div class="blog-column blog-column-trio" data-reveal="group">
             <article class="blog-card">
               <a href="https://bestknownpest.com/what-happens-during-a-wildlife-removal/">
-                <img src="assets/images/blog-wildlife.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
+                <span class="blog-image"><img src="assets/images/blog-wildlife.jpg" width="445" height="360" alt="" loading="lazy" decoding="async"></span>
                 <div class="blog-copy">
                   <h3>What Happens During a Wildlife Removal? The Best Known Pest &amp; Wildlife Process</h3>
                   <p><time datetime="2026-07-06">Jul 6, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
@@ -307,7 +316,7 @@
             </article>
             <article class="blog-card">
               <a href="https://bestknownpest.com/wasp-nest-in-your-billerica-attic-signs-risks-and-safe-professional-removal-options/">
-                <img src="assets/images/blog-wasp-nest.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
+                <span class="blog-image"><img src="assets/images/blog-wasp-nest.jpg" width="445" height="360" alt="" loading="lazy" decoding="async"></span>
                 <div class="blog-copy">
                   <h3>Wasp Nest in Your Billerica Attic? Signs, Risks, and Safe Professional Removal Options</h3>
                   <p><time datetime="2026-06-01">Jun 1, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
@@ -316,7 +325,7 @@
             </article>
             <article class="blog-card">
               <a href="https://bestknownpest.com/professional-bat-removal-in-massachusetts-from-entry-point-identification-to-long-term-solutions/">
-                <img src="assets/images/blog-bats.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
+                <span class="blog-image"><img src="assets/images/blog-bats.jpg" width="445" height="360" alt="" loading="lazy" decoding="async"></span>
                 <div class="blog-copy">
                   <h3>Professional Bat Removal in Massachusetts: From Entry Point Identification to Long-Term Solutions</h3>
                   <p><time datetime="2026-05-01">May 1, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
@@ -336,7 +345,9 @@
             <a class="area-link" href="https://bestknownpest.com/service-area/">View the full town list</a>
           </div>
         </div>
-        <img class="area-map" src="assets/images/service-area-map.svg" width="1258" height="792" alt="Illustrated map of Massachusetts with a central area highlighted in red" loading="lazy" decoding="async" data-reveal="map">
+        <object class="area-map" data="assets/images/service-area-map.svg" type="image/svg+xml" width="1258" height="792" role="img" aria-label="Illustrated map of Massachusetts with a central area highlighted in red" tabindex="-1" data-reveal="map">
+          <img src="assets/images/service-area-map.svg" width="1258" height="792" alt="Illustrated map of Massachusetts with a central area highlighted in red">
+        </object>
       </section>
 
       <section id="contact" aria-labelledby="contact-title" tabindex="-1">
@@ -404,7 +415,7 @@
       </section>
       <div class="footer-grid">
         <div>
-          <img class="footer-mark" src="assets/icons/brand-beetle.svg" width="22" height="27" alt="">
+          <img class="footer-mark" src="assets/images/best-known-logo.png" width="64" height="64" alt="">
           <h3>Best Known Pest &amp; Wildlife</h3>
           <address>P.O. Box 54, Tewksbury, MA 01876</address>
           <p><a class="call-link" href="tel:+17813331998">Call (781) 333-1998</a></p>

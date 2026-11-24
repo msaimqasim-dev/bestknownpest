@@ -29,7 +29,7 @@
     --heading-size: clamp(1.875rem, 4.17vw, 2.25rem);
     --panel-pad: clamp(1.5rem, 3.6vw, 2rem);
   }
-  .hero { min-height: clamp(30rem, 68svh, 42rem); }
+  .hero { min-height: clamp(31rem, 73svh, 44rem); }
   .hero h1 { font-size: clamp(2.75rem, 7vw, 4rem); }
   .hero-lead { max-width: 28rem; }
   .owner .actions { column-gap: .75rem; }
@@ -46,13 +46,14 @@
 }
 
 @media (max-width: 42rem) {
-  html { --sticky-header-inset: 12px; }
+  html { --sticky-header-inset: 12px; --header-logo-size: 3rem; }
   :root {
     --gutter: clamp(1rem, 4vw, 1.25rem);
     --heading-size: clamp(1.625rem, 6.75vw, 1.875rem);
     --panel-pad: 1.25rem;
   }
-  .hero { --hero-inset: .75rem; min-height: min(38rem, 82svh); padding: .75rem var(--hero-inset) 1rem; background-position: 54% center; }
+  .hero { --hero-inset: .75rem; min-height: min(39rem, 86svh); padding: .75rem var(--hero-inset) 1.375rem; }
+  .hero-media::after { background: linear-gradient(rgb(10 18 9 / 70%), rgb(10 18 9 / 53%)); }
   .site-header { padding-inline: .65rem; }
   .hero-content { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
   .hero-copy { padding-block: clamp(1.75rem, 7vw, 3rem) 0; }
@@ -73,7 +74,7 @@
   .blog-grid, .service-area { grid-template-columns: minmax(0, 1fr); }
   .blog-column { grid-auto-rows: auto; }
   .blog-feature > a { grid-template-rows: auto 1fr; gap: 1rem; }
-  .blog-feature img { height: auto; aspect-ratio: 16 / 9; }
+  .blog-feature .blog-image { height: auto; aspect-ratio: 16 / 9; }
   .area-map { max-width: 26rem; }
   .contact-info { display: flex; }
   .hours { padding-top: 1.15rem; border-top: 1px solid var(--line); }
@@ -82,7 +83,7 @@
 }
 
 @media (max-width: 32rem) {
-  html { --header-bar-height: 6.625rem; }
+  html { --header-bar-height: calc(var(--header-logo-size) + 3.875rem); }
   .site-header { grid-template-columns: minmax(0, 1fr) auto; }
   .header-call { grid-column: 1 / -1; grid-row: 2; }
   .primary-nav { grid-row: 3; }
@@ -90,7 +91,6 @@
 
 @media (max-width: 29rem) {
   .site-header .brand { gap: .4rem; }
-  .site-header .brand img { flex: none; }
   .header-call, .menu-toggle { padding-inline: .5rem; }
   .form-fields { grid-template-columns: minmax(0, 1fr); }
   .hero .actions { gap: .5rem; }

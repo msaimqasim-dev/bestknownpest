@@ -110,6 +110,45 @@ document.addEventListener('click', event => {
   if (!nav.contains(event.target)) closeGroups();
 });
 
+const heroVideo = document.querySelector('.hero-video');
+const videoToggle = document.querySelector('.hero-video-toggle');
+let heroVideoVisible = !('IntersectionObserver' in window);
+let heroVideoPaused = false;
+
+function updateVideoToggle() {
+  const playing = !heroVideo.paused;
+  videoToggle.toggleAttribute('data-playing', playing);
+  videoToggle.setAttribute('aria-label', playing ? 'Pause background video' : 'Play background video');
+}
+
+function updateHeroVideo() {
+  videoToggle.hidden = reducedMotion.matches || Boolean(heroVideo.error);
+  if (!videoToggle.hidden && heroVideoVisible && !heroVideoPaused && !document.hidden) {
+    heroVideo.play().catch(updateVideoToggle);
+  } else {
+    heroVideo.pause();
+  }
+}
+
+videoToggle.addEventListener('click', () => {
+  heroVideoPaused = !heroVideo.paused;
+  updateHeroVideo();
+});
+heroVideo.addEventListener('play', updateVideoToggle);
+heroVideo.addEventListener('pause', updateVideoToggle);
+heroVideo.addEventListener('error', updateHeroVideo);
+document.addEventListener('visibilitychange', updateHeroVideo);
+reducedMotion.addEventListener('change', updateHeroVideo);
+if ('IntersectionObserver' in window) {
+  const videoVisibilityThreshold = .15;
+  const heroVideoObserver = new IntersectionObserver(([entry]) => {
+    heroVideoVisible = entry.intersectionRatio >= videoVisibilityThreshold;
+    updateHeroVideo();
+  }, { threshold: videoVisibilityThreshold });
+  heroVideoObserver.observe(heroVideo);
+}
+updateHeroVideo();
+
 const pestField = document.querySelector('#pest');
 let suggestedPest = '';
 pestField.addEventListener('change', () => { suggestedPest = ''; });
@@ -122,9 +161,9 @@ document.querySelector('#services').addEventListener('click', event => {
 });
 
 const serviceMarquee = document.querySelector('.service-marquee');
+const serviceTrack = serviceMarquee.querySelector('.service-marquee-track');
 const serviceList = serviceMarquee.querySelector('.service-cards');
 const serviceCopy = serviceList.cloneNode(true);
-const marqueeToggle = document.querySelector('.service-marquee-toggle');
 serviceCopy.hidden = true;
 serviceCopy.setAttribute('aria-hidden', 'true');
 serviceCopy.querySelectorAll('a').forEach(link => { link.tabIndex = -1; });
@@ -133,7 +172,8 @@ serviceCopy.addEventListener('mousedown', event => {
 });
 serviceList.after(serviceCopy);
 
-let marqueePaused = false;
+let marqueeTouchPaused = false;
+let marqueeTouchTimer = 0;
 let marqueeHovered = false;
 let marqueeFocused = false;
 let marqueeVisible = !('IntersectionObserver' in window);
@@ -142,11 +182,15 @@ let previousFrame = null;
 let marqueeOffset = 0;
 let marqueeCycle = 0;
 
+function renderMarquee() {
+  serviceTrack.style.transform = `translate3d(${-marqueeOffset}px, 0, 0)`;
+}
+
 function advanceMarquee(time) {
   if (previousFrame !== null) {
     const elapsed = Math.min(time - previousFrame, 50);
     marqueeOffset = (marqueeOffset + elapsed * .045) % marqueeCycle;
-    serviceMarquee.scrollLeft = marqueeOffset;
+    renderMarquee();
   }
   previousFrame = time;
   marqueeFrame = requestAnimationFrame(advanceMarquee);
@@ -154,14 +198,19 @@ function advanceMarquee(time) {
 
 function updateMarquee() {
   const playing = marqueeVisible && !reducedMotion.matches && marqueeCycle > 0
-    && !marqueePaused && !marqueeHovered && !marqueeFocused;
+    && !marqueeTouchPaused && !marqueeHovered && !marqueeFocused;
   if (playing && !marqueeFrame) {
-    marqueeOffset = serviceMarquee.scrollLeft;
+    marqueeOffset = serviceMarquee.scrollLeft % marqueeCycle;
+    serviceMarquee.scrollLeft = 0;
+    renderMarquee();
     marqueeFrame = requestAnimationFrame(advanceMarquee);
   } else if (!playing && marqueeFrame) {
     cancelAnimationFrame(marqueeFrame);
     marqueeFrame = 0;
     previousFrame = null;
+    // Put the stationary track back at the same position for swipe and keyboard scrolling.
+    serviceTrack.style.removeProperty('transform');
+    serviceMarquee.scrollLeft = marqueeOffset;
   }
 }
 
@@ -172,17 +221,18 @@ function measureMarquee() {
 
 function updateMarqueeMotion() {
   serviceCopy.hidden = reducedMotion.matches;
-  marqueeToggle.hidden = reducedMotion.matches;
   measureMarquee();
 }
 
-function setMarqueePaused(paused) {
-  marqueePaused = paused;
-  marqueeToggle.textContent = paused ? 'Resume' : 'Pause';
-  updateMarquee();
+function resumeMarqueeAfterTouch() {
+  clearTimeout(marqueeTouchTimer);
+  marqueeTouchTimer = setTimeout(() => {
+    marqueeTouchTimer = 0;
+    marqueeTouchPaused = false;
+    updateMarquee();
+  }, 500);
 }
 
-marqueeToggle.addEventListener('click', () => setMarqueePaused(!marqueePaused));
 serviceMarquee.addEventListener('pointerenter', event => {
   marqueeHovered = event.pointerType !== 'touch';
   updateMarquee();
@@ -191,12 +241,24 @@ serviceMarquee.addEventListener('pointerleave', () => {
   marqueeHovered = false;
   updateMarquee();
 });
-serviceMarquee.addEventListener('pointerdown', event => {
-  if (event.pointerType === 'touch') setMarqueePaused(true);
-});
-serviceMarquee.addEventListener('focusin', () => {
+serviceMarquee.addEventListener('touchstart', () => {
+  clearTimeout(marqueeTouchTimer);
+  marqueeTouchTimer = 0;
+  marqueeTouchPaused = true;
+  updateMarquee();
+}, { passive: true });
+for (const event of ['touchend', 'touchcancel']) {
+  serviceMarquee.addEventListener(event, e => {
+    if (!e.targetTouches.length) resumeMarqueeAfterTouch();
+  }, { passive: true });
+}
+serviceMarquee.addEventListener('scroll', () => {
+  if (marqueeTouchTimer) resumeMarqueeAfterTouch();
+}, { passive: true });
+serviceMarquee.addEventListener('focusin', event => {
   marqueeFocused = true;
   updateMarquee();
+  if (event.target.matches(':focus-visible')) event.target.scrollIntoView({ block: 'nearest', inline: 'nearest' });
 });
 serviceMarquee.addEventListener('focusout', event => {
   marqueeFocused = serviceMarquee.contains(event.relatedTarget);
