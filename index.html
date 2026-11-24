@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/motion.css">
   <script src="js/main.js" defer></script>
 </head>
 <body>
@@ -24,7 +25,6 @@
           <span class="menu-icon" aria-hidden="true"></span> Menu
         </button>
         <nav class="primary-nav" id="primary-nav" aria-label="Primary">
-          <a href="#home">Home</a>
           <details class="nav-group">
             <summary>Residential Pest Control</summary>
             <div class="nav-submenu">
@@ -43,22 +43,31 @@
             </div>
           </details>
           <a href="https://bestknownpest.com/chimney-caps/">Chimney Caps &amp; Vent Covers</a>
+          <a href="#service-area">Service Areas</a>
           <a href="#blog">Blog</a>
           <a href="#contact">Contact Us</a>
         </nav>
+        <a class="button button-light call-link header-call" href="tel:+17813331998">Call (781) 333-1998</a>
       </div>
       <div class="hero-content">
         <div class="hero-copy">
-          <h1>Fast, Safe<br>&amp; Reliable<br>Pest Control</h1>
-          <p>Best Known Pest &amp; Wildlife provides pest and wildlife control services for residential property owners in Middlesex County, MA, and beyond.</p>
+          <h1>
+            <span class="hero-line"><span>Fast, Safe</span></span>
+            <span class="hero-line"><span>&amp; Reliable</span></span>
+            <span class="hero-line"><span>Pest Control</span></span>
+          </h1>
+          <p class="hero-lead"><strong>Owner-operated pest and wildlife control in Tewksbury, MA.</strong><span>Speak directly with Brendan Walsh about the pest problem in your home.</span></p>
           <div class="actions">
-            <a class="button" href="tel:+17813331998"><img src="assets/icons/phone.svg" alt="" width="19" height="19"> Call (781) 333-1998</a>
-            <a class="button" href="#contact">Schedule Inspection <img src="assets/icons/arrow-right.svg" alt="" width="18" height="18"></a>
+            <a class="button" href="#contact">Request an Inspection <img src="assets/icons/arrow-right.svg" alt="" width="18" height="18"></a>
+            <a class="button hero-phone call-link" href="tel:+17813331998">Call (781) 333-1998</a>
           </div>
         </div>
-        <a class="hero-card" href="#services">
-          <img src="assets/images/hero-service.jpg" alt="" width="259" height="182">
-          <span>Explore our residential pest control services <span aria-hidden="true">→</span></span>
+        <a class="hero-card" href="#services" aria-label="Explore Best Known Pest &amp; Wildlife services">
+          <span class="hero-card-photo">
+            <img src="assets/images/hero-service.jpg" alt="" width="259" height="182">
+            <span class="hero-card-play" aria-hidden="true"></span>
+          </span>
+          <span>Best Known Pest &amp; Wildlife provides pest and wildlife control services for residential property owners in Middlesex County MA &amp; Beyond.</span>
         </a>
       </div>
     </header>
@@ -66,59 +75,78 @@
     <main id="main" class="main" tabindex="-1">
       <section id="services" aria-labelledby="services-title">
         <div class="section-heading">
-          <h2 id="services-title">Some of the Pest Control Services We Offer</h2>
-          <div class="carousel-controls" hidden>
-            <button type="button" aria-label="Previous services" aria-controls="service-cards" data-step="-1"><span aria-hidden="true">←</span></button>
-            <button type="button" aria-label="Next services" aria-controls="service-cards" data-step="1"><span aria-hidden="true">→</span></button>
+          <h2 id="services-title">Find Help for Your Pest Problem</h2>
+          <button class="service-marquee-toggle" type="button" aria-controls="service-marquee" hidden>Pause</button>
+        </div>
+        <div class="service-marquee" id="service-marquee">
+          <div class="service-marquee-track">
+            <ul class="service-cards" role="list">
+              <li class="service-card">
+                <a class="service-card-link" href="https://bestknownpest.com/residential-pest-control/">
+                  <span class="service-card-media"><img src="assets/images/seasonal-invader.png" width="237" height="127" alt="" loading="lazy" decoding="async"></span>
+                  <h3>Seasonal Invaders</h3>
+                  <p>Pests that find their way indoors as the seasons change.</p>
+                  <span class="service-card-action">Explore pest control</span>
+                </a>
+              </li>
+              <li class="service-card">
+                <a class="service-card-link" href="#contact" data-pest="Wood destroying insect inspection">
+                  <span class="service-card-media"><img src="assets/images/wood-destroying-insect.png" width="237" height="121" alt="" loading="lazy" decoding="async"></span>
+                  <h3>Wood Destroying Insect Reports</h3>
+                  <p>Inspections for real estate transactions.</p>
+                  <span class="service-card-action">Request a report</span>
+                </a>
+              </li>
+              <li class="service-card">
+                <a class="service-card-link" href="https://bestknownpest.com/rodent-control/">
+                  <span class="service-card-media"><img src="assets/images/rodent.png" width="237" height="127" alt="" loading="lazy" decoding="async"></span>
+                  <h3>Rodent Control</h3>
+                  <p>Help with mice and rats inside your home.</p>
+                  <span class="service-card-action">Explore rodent control</span>
+                </a>
+              </li>
+              <li class="service-card">
+                <a class="service-card-link" href="https://bestknownpest.com/ant-extermination/">
+                  <span class="service-card-media"><img src="assets/images/carpenter-ant.png" width="237" height="127" alt="" loading="lazy" decoding="async"></span>
+                  <h3>Carpenter Ant Control</h3>
+                  <p>Help with ants around damp or decaying wood.</p>
+                  <span class="service-card-action">Explore ant control</span>
+                </a>
+              </li>
+              <li class="service-card">
+                <a class="service-card-link" href="#contact" data-pest="Termites">
+                  <span class="service-card-media"><img src="assets/images/termite.png" width="237" height="151" alt="" loading="lazy" decoding="async"></span>
+                  <h3>Termite Control</h3>
+                  <p>Discuss signs of termites and possible next steps.</p>
+                  <span class="service-card-action">Ask about termites</span>
+                </a>
+              </li>
+              <li class="service-card">
+                <a class="service-card-link" href="https://bestknownpest.com/hornet-and-wasp-removal/">
+                  <span class="service-card-media"><img src="assets/images/hornet.png" width="237" height="175" alt="" loading="lazy" decoding="async"></span>
+                  <h3>Hornets &amp; Wasps</h3>
+                  <p>Help with hornets and wasps around your home.</p>
+                  <span class="service-card-action">Explore nest removal</span>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-        <ul class="service-cards" id="service-cards" aria-label="Pest control services" tabindex="0">
-          <li class="service-card">
-            <img src="assets/images/seasonal-invader.png" width="237" height="127" alt="" loading="lazy" decoding="async">
-            <h3>Seasonal Invaders</h3>
-            <p>Outdoor pests can sneak into your home at predictable times of year.</p>
-          </li>
-          <li class="service-card">
-            <img src="assets/images/wood-destroying-insect.png" width="237" height="121" alt="" loading="lazy" decoding="async">
-            <h3>Wood Destroying Insect Reports</h3>
-            <p>These reports are required in many real estate transactions.</p>
-          </li>
-          <li class="service-card">
-            <img src="assets/images/rodent.png" width="237" height="127" alt="" loading="lazy" decoding="async">
-            <h3>Rodent Control</h3>
-            <p>Rodents enter properties seeking warmth, food, and shelter.</p>
-          </li>
-          <li class="service-card">
-            <img src="assets/images/carpenter-ant.png" width="237" height="127" alt="" loading="lazy" decoding="async">
-            <h3>Carpenter Ant Control</h3>
-            <p>Carpenter ants target damp or decaying wood near leaky roofs, decks, and additions.</p>
-          </li>
-          <li class="service-card">
-            <img src="assets/images/termite.png" width="237" height="151" alt="" loading="lazy" decoding="async">
-            <h3>Termite Control</h3>
-            <p>Termites can cause major damage while going unnoticed.</p>
-          </li>
-          <li class="service-card">
-            <img src="assets/images/hornet.png" width="237" height="175" alt="" loading="lazy" decoding="async">
-            <h3>Hornets &amp; Wasps</h3>
-            <p>Professional help with hornets and wasps around your home.</p>
-          </li>
-        </ul>
       </section>
 
       <section class="owner panel" id="about" aria-labelledby="owner-title">
         <div class="owner-grid">
           <div class="prose">
             <h2 id="owner-title">Meet Brendan Walsh, Owner &amp; Operator of Best Known Pest &amp; Wildlife in Tewksbury, MA</h2>
-            <p>When you call Best Known Pest &amp; Wildlife, you’ll speak directly with owner Brendan Walsh. He’ll answer your questions, discuss your pest issue, and determine whether a site inspection is needed before providing an estimate and scheduling service.</p>
-            <p>To schedule an inspection or treatment, call <a href="tel:+17813331998">781-333-1998</a>, email <a href="mailto:bestknownpest@gmail.com">bestknownpest@gmail.com</a>, or <a href="#contact">complete the form below</a>.</p>
+            <p>Brendan owns and operates Best Known Pest &amp; Wildlife in Tewksbury. He’s the person you’ll speak with about pests, insects, or nuisance animals around your home.</p>
+            <p>To request an inspection or treatment, call <a href="tel:+17813331998">781-333-1998</a>, email <a href="mailto:bestknownpest@gmail.com">bestknownpest@gmail.com</a>, or <a href="#contact">complete the form below</a>.</p>
             <p><a href="#reviews">Read Our Customer Reviews</a><br><a href="https://www.facebook.com/BestKnownPest/">Follow Us on Facebook</a></p>
             <div class="actions">
-              <a class="button button-dark" href="tel:+17813331998">Call (781) 333-1998</a>
+              <a class="button button-dark call-link" href="tel:+17813331998">Call (781) 333-1998</a>
               <a class="button button-dark" href="#contact">Get In Touch <img src="assets/icons/arrow-right.svg" alt="" width="18" height="18"></a>
             </div>
           </div>
-          <figure class="owner-photo">
+          <figure class="owner-photo" data-reveal>
             <img src="assets/images/brendan-walsh.jpg" alt="Brendan Walsh holding a removed nest" width="1351" height="1164" loading="lazy" decoding="async">
             <figcaption><strong>Brendan Walsh</strong><span>Owner &amp; Operator of Best Known Pest</span></figcaption>
           </figure>
@@ -138,15 +166,19 @@
           <div class="collage-mark" aria-hidden="true"><img src="assets/icons/experience-beetle.svg" alt="" width="42" height="42"></div>
         </div>
         <div class="prose">
-          <h2 id="company-title">Pest Control Company Servicing Middlesex County, MA &amp; Beyond</h2>
-          <p>New England homeowners face pest and wildlife problems year-round. Best Known Pest &amp; Wildlife offers residential pest control, wildlife removal and exclusion, and chimney cap and vent cover installation.</p>
-          <div class="actions"><a class="button" href="tel:+17813331998">Call (781) 333-1998</a></div>
+          <h2 id="company-title">What Happens When You Call</h2>
+          <ol class="service-steps">
+            <li><h3>Tell Brendan what you’re seeing</h3><p>You’ll speak directly with the owner about what’s happening at your home.</p></li>
+            <li><h3>Find out if an inspection is needed</h3><p>Brendan will discuss the issue with you and decide whether he needs to see the property.</p></li>
+            <li><h3>Discuss the estimate and timing</h3><p>Once Brendan has enough information, he can provide an estimate and discuss scheduling.</p></li>
+          </ol>
+          <div class="actions"><a class="button call-link" href="tel:+17813331998">Call (781) 333-1998</a></div>
         </div>
       </section>
 
       <section class="faq" id="faq" aria-labelledby="faq-title">
         <div>
-          <h2 id="faq-title">Frequently Asked Questions</h2>
+          <h2 id="faq-title" data-reveal>Frequently Asked Questions</h2>
           <img src="assets/images/faq-technician.jpg" alt="A technician treating an outdoor area" width="585" height="360" loading="lazy" decoding="async">
         </div>
         <div class="faq-list">
@@ -174,85 +206,126 @@
       </section>
 
       <section class="reviews panel" id="reviews" aria-labelledby="reviews-title">
-        <img class="review-photo" src="assets/images/ants-by-walkway.jpg" alt="Ants gathered along a walkway" width="579" height="694" loading="lazy" decoding="async">
+        <div class="review-visual">
+          <img class="review-photo" src="assets/images/reviews-ants.png" alt="Ants gathered along a walkway" width="579" height="694" loading="lazy" decoding="async">
+          <a class="review-badge" href="https://bestknownpest.com/reviews/">
+            <span>Read More<br>Customer Reviews</span>
+            <img class="review-badge-underline" src="assets/icons/review-underline.svg" alt="" width="205" height="26">
+            <span class="review-badge-avatars" aria-hidden="true">
+              <img src="assets/images/review-badge-avatar-1.png" alt="" width="58" height="58" loading="lazy">
+              <img src="assets/images/review-badge-avatar-2.png" alt="" width="58" height="58" loading="lazy">
+              <img src="assets/images/review-badge-avatar-3.png" alt="" width="58" height="58" loading="lazy">
+              <img src="assets/icons/review-plus.svg" alt="" width="58" height="58">
+            </span>
+          </a>
+        </div>
+        <img class="review-bee" src="assets/icons/review-bee.svg" alt="" width="110" height="100" loading="lazy">
         <div class="review-copy">
           <h2 id="reviews-title">What Our Massachusetts Pest Control Clients Are Saying</h2>
-          <figure class="testimonial">
-            <span class="quote-mark" aria-hidden="true">“</span>
-            <blockquote>
-              <p>Brendan was great. He showed up on time. He was very pleasant and most importantly he got rid of two rather large nests for us.</p>
-            </blockquote>
-            <figcaption>Jane T.</figcaption>
-          </figure>
-          <a class="button button-light" href="https://bestknownpest.com/reviews/">Read More Customer Reviews</a>
+          <img class="review-stars" src="assets/icons/review-stars.svg" alt="" width="260" height="44">
+          <div class="review-testimonials" aria-live="polite" aria-atomic="true">
+            <figure class="testimonial" id="review-jane">
+              <blockquote cite="https://bestknownpest.com/pest-control-in-wilmington-ma/">
+                <p>Brendan was great. He showed up on time. He was very pleasant and most importantly he got rid of two rather large nests for us.</p>
+              </blockquote>
+              <figcaption><span class="review-initials" aria-hidden="true">JT</span> Jane T.</figcaption>
+            </figure>
+            <figure class="testimonial" id="review-maryellen" hidden>
+              <blockquote cite="https://bestknownpest.com/pest-control-company-north-andover-ma/">
+                <p>Overall, we couldn’t recommend Brendan and Best Known Pest Control enough! Will be using him in the future, for future pest needs!</p>
+              </blockquote>
+              <figcaption><span class="review-initials" aria-hidden="true">MM</span> Maryellen Marini</figcaption>
+            </figure>
+            <figure class="testimonial" id="review-wendy" hidden>
+              <blockquote cite="https://bestknownpest.com/exceptional-pest-control-services-in-acton-ma/">
+                <p>Brendan is the best! I highly recommend! Explains everything clearly, is efficient and a pleasure to work with.</p>
+              </blockquote>
+              <figcaption><span class="review-initials" aria-hidden="true">WF</span> Wendy F.</figcaption>
+            </figure>
+            <figure class="testimonial" id="review-christine" hidden>
+              <blockquote cite="https://bestknownpest.com/exceptional-pest-control-services-in-acton-ma/">
+                <p>He’s knowledgeable, friendly, fair, and responsive.</p>
+              </blockquote>
+              <figcaption><span class="review-initials" aria-hidden="true">CB</span> Christine B.</figcaption>
+            </figure>
+          </div>
+          <div class="review-controls" role="group" aria-label="Choose a customer review" hidden>
+            <button type="button" aria-controls="review-jane" aria-label="Review by Jane T." aria-pressed="true"></button>
+            <button type="button" aria-controls="review-maryellen" aria-label="Review by Maryellen Marini" aria-pressed="false"></button>
+            <button type="button" aria-controls="review-wendy" aria-label="Review by Wendy F." aria-pressed="false"></button>
+            <button type="button" aria-controls="review-christine" aria-label="Review by Christine B." aria-pressed="false"></button>
+          </div>
         </div>
       </section>
 
       <section id="blog" aria-labelledby="blog-title">
-        <h2 class="center-heading" id="blog-title">Pest &amp; Wildlife Control Blog</h2>
+        <div class="section-heading blog-heading">
+          <h2 id="blog-title">Pest &amp; Wildlife Control Blog</h2>
+          <a href="https://bestknownpest.com/blog/">View all articles</a>
+        </div>
         <div class="blog-grid">
-          <article class="blog-card">
+          <article class="blog-card blog-feature" data-reveal="group">
             <a href="https://bestknownpest.com/how-best-known-pest-wildlife-removes-squirrels-from-homes-in-wilbraham-ma/">
               <img src="assets/images/blog-squirrel.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
               <h3>How Best Known Pest &amp; Wildlife Removes Squirrels From Homes in Wilbraham MA</h3>
+              <p><time datetime="2026-09-04">Sep 4, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
             </a>
-            <p><time datetime="2026-09-04">Sep 4, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
           </article>
-          <article class="blog-card">
-            <a href="https://bestknownpest.com/how-to-keep-raccoons-away-from-your-house/">
-              <img src="assets/images/blog-raccoon.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
-              <h3>How to Keep Raccoons Away From Your House in Andover, MA: 12 Proven Prevention Methods</h3>
-            </a>
-            <p><time datetime="2026-10-01">Oct 1, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
-          </article>
-          <article class="blog-card">
-            <a href="https://bestknownpest.com/how-fast-can-a-mice-exterminator-solve-an-infestation/">
-              <img src="assets/images/blog-mouse.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
-              <h3>How Fast Can a Mice Exterminator Solve an Infestation in Your North Andover Home?</h3>
-            </a>
-            <p><time datetime="2026-08-01">Aug 1, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
-          </article>
-          <article class="blog-card">
-            <a href="https://bestknownpest.com/what-happens-during-a-wildlife-removal/">
-              <img src="assets/images/blog-wildlife.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
-              <h3>What Happens During a Wildlife Removal? The Best Known Pest &amp; Wildlife Process</h3>
-            </a>
-            <p><time datetime="2026-07-06">Jul 6, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
-          </article>
-          <article class="blog-card">
-            <a href="https://bestknownpest.com/wasp-nest-in-your-billerica-attic-signs-risks-and-safe-professional-removal-options/">
-              <img src="assets/images/blog-wasp-nest.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
-              <h3>Wasp Nest in Your Billerica Attic? Signs, Risks, and Safe Professional Removal Options</h3>
-            </a>
-            <p><time datetime="2026-06-01">Jun 1, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
-          </article>
-          <article class="blog-card">
-            <a href="https://bestknownpest.com/professional-bat-removal-in-massachusetts-from-entry-point-identification-to-long-term-solutions/">
-              <img src="assets/images/blog-bats.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
-              <h3>Professional Bat Removal in Massachusetts: From Entry Point Identification to Long-Term Solutions</h3>
-            </a>
-            <p><time datetime="2026-05-01">May 1, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
-          </article>
+          <div class="blog-list" data-reveal="group">
+            <article class="blog-card">
+              <a href="https://bestknownpest.com/how-to-keep-raccoons-away-from-your-house/">
+                <img src="assets/images/blog-raccoon.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
+                <h3>How to Keep Raccoons Away From Your House in Andover, MA: 12 Proven Prevention Methods</h3>
+                <p><time datetime="2026-10-01">Oct 1, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
+              </a>
+            </article>
+            <article class="blog-card">
+              <a href="https://bestknownpest.com/how-fast-can-a-mice-exterminator-solve-an-infestation/">
+                <img src="assets/images/blog-mouse.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
+                <h3>How Fast Can a Mice Exterminator Solve an Infestation in Your North Andover Home?</h3>
+                <p><time datetime="2026-08-01">Aug 1, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
+              </a>
+            </article>
+            <article class="blog-card">
+              <a href="https://bestknownpest.com/what-happens-during-a-wildlife-removal/">
+                <img src="assets/images/blog-wildlife.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
+                <h3>What Happens During a Wildlife Removal? The Best Known Pest &amp; Wildlife Process</h3>
+                <p><time datetime="2026-07-06">Jul 6, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
+              </a>
+            </article>
+            <article class="blog-card">
+              <a href="https://bestknownpest.com/wasp-nest-in-your-billerica-attic-signs-risks-and-safe-professional-removal-options/">
+                <img src="assets/images/blog-wasp-nest.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
+                <h3>Wasp Nest in Your Billerica Attic? Signs, Risks, and Safe Professional Removal Options</h3>
+                <p><time datetime="2026-06-01">Jun 1, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
+              </a>
+            </article>
+            <article class="blog-card">
+              <a href="https://bestknownpest.com/professional-bat-removal-in-massachusetts-from-entry-point-identification-to-long-term-solutions/">
+                <img src="assets/images/blog-bats.jpg" width="445" height="360" alt="" loading="lazy" decoding="async">
+                <h3>Professional Bat Removal in Massachusetts: From Entry Point Identification to Long-Term Solutions</h3>
+                <p><time datetime="2026-05-01">May 1, 2026</time> <span aria-hidden="true">·</span> Pest Control News</p>
+              </a>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section class="service-area" id="service-area" aria-labelledby="area-title">
-        <div class="section-heading area-heading">
-          <div>
-            <h2 id="area-title">MA &amp; NH Service Areas</h2>
-            <p><a href="https://bestknownpest.com/service-area/">View the listed Massachusetts towns</a> or <a href="tel:+17813331998">call to confirm service</a> in your area.</p>
-          </div>
+      <section class="service-area panel" id="service-area" aria-labelledby="area-title">
+        <div class="area-copy">
+          <h2 id="area-title">Pest Control in Middlesex &amp; Essex Counties, MA</h2>
+          <p>Based in Tewksbury, we serve nearby communities in both counties, including Billerica, Chelmsford, Wilmington, Andover, and North Andover.</p>
           <div class="actions">
-            <a class="button button-dark" href="tel:+17813331998">Call (781) 333-1998</a>
-            <a class="button button-dark" href="#contact">Get In Touch <img src="assets/icons/arrow-right.svg" alt="" width="18" height="18"></a>
+            <a class="button call-link" href="tel:+17813331998">Call to Confirm Your Town</a>
+            <a class="area-link" href="https://bestknownpest.com/service-area/">View the full town list</a>
           </div>
         </div>
-        <img class="area-map" src="assets/images/service-area-map.svg" width="1258" height="792" alt="Illustrated map of Massachusetts" loading="lazy" decoding="async">
+        <img class="area-map" src="assets/images/service-area-map.svg" width="1258" height="792" alt="Illustrated map of Massachusetts with a central area highlighted in red" loading="lazy" decoding="async" data-reveal="map">
       </section>
 
-      <section id="contact" aria-labelledby="contact-title">
+      <section id="contact" aria-labelledby="contact-title" tabindex="-1">
         <div class="contact-heading">
-          <h2 id="contact-title">Let’s take care of<br> your pest problem.</h2>
+          <h2 id="contact-title" data-reveal>Let’s take care of<br> your pest problem.</h2>
           <p>Tell us what’s happening. Best Known Pest &amp; Wildlife is here to help.</p>
         </div>
         <div class="contact-grid">
@@ -288,7 +361,7 @@
             <p>Tewksbury, Massachusetts 01876</p>
             <dl>
               <dt>Email</dt><dd><a href="mailto:bestknownpest@gmail.com">bestknownpest@gmail.com</a></dd>
-              <dt>Phone</dt><dd><a class="contact-phone" href="tel:+17813331998">+1-781-333-1998</a></dd>
+              <dt>Phone</dt><dd><a class="contact-phone call-link" href="tel:+17813331998">+1-781-333-1998</a></dd>
             </dl>
             <div class="hours">
               <h3>Hours of Operation</h3>
@@ -309,16 +382,16 @@
 
     <footer class="site-footer panel">
       <section class="inspection" aria-labelledby="inspection-title">
-        <h2 id="inspection-title">Buying a Home, Condo, or Multifamily Space?</h2>
+        <h2 id="inspection-title" data-reveal>Buying a Home, Condo, or Multifamily Space?</h2>
         <p>Schedule a VA/FHA-compliant real estate pest inspection.</p>
-        <a class="button button-light" href="tel:+17813331998">Call (781) 333-1998</a>
+        <a class="button button-light call-link" href="tel:+17813331998">Call (781) 333-1998</a>
       </section>
       <div class="footer-grid">
         <div>
           <img class="footer-mark" src="assets/icons/brand-beetle.svg" width="22" height="27" alt="">
           <h3>Best Known Pest &amp; Wildlife</h3>
           <address>P.O. Box 54, Tewksbury, MA 01876</address>
-          <p><a href="tel:+17813331998">Call (781) 333-1998</a></p>
+          <p><a class="call-link" href="tel:+17813331998">Call (781) 333-1998</a></p>
         </div>
         <nav aria-label="Residential pest control">
           <h3>Services</h3>

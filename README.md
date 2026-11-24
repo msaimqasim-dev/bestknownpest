@@ -23,7 +23,7 @@ The newsletter form collects signup requests. Connect your email marketing provi
 
 - Edit page copy, photo references, hours, and links in `index.html`.
 - Adjust the palette, typography, and spacing in `css/variables.css`. Section styles live in `css/style.css` and responsive rules in `css/responsive.css`.
-- `js/main.js` handles the menu, service carousel, and preview form feedback. The FAQ uses native HTML disclosure controls.
-- Images and icons in `assets/` came from the Figma export. The map was recovered from the Figma PDF and uses a stronger fill for visibility. The original ZIP remains the source for the full export.
+- `js/main.js` handles the menu, review selection, service form shortcuts, and preview form feedback. The FAQ uses native HTML disclosure controls. Scroll reveals are marked with `data-reveal` in `index.html`. Timings and keyframes live in `css/motion.css`.
+- Images and icons in `assets/` came from the Figma export. The map uses the supplied SVG, including its red highlight and white pin. The service-area copy follows the [client’s published coverage list](https://bestknownpest.com/service-area/). The original ZIP remains the source for the full export.
 
-The design supplied a hero thumbnail without a video URL, so it links to the services section. Blog destinations and publication dates follow the [client’s published blog](https://bestknownpest.com/blog/). The review is excerpted from the [client’s Wilmington service page](https://bestknownpest.com/pest-control-in-wilmington-ma/). The FAQ uses published service information and routes case-specific questions to Brendan.
+The hero thumbnail links to the services section. Blog destinations and publication dates follow the [client’s published blog](https://bestknownpest.com/blog/). Source URLs for review excerpts are recorded in the `cite` attributes in `index.html`. The FAQ uses published service information and routes case-specific questions to Brendan.

@@ -1,6 +1,6 @@
 const menuButton = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#primary-nav');
-const mobileLayout = matchMedia('(max-width: 70rem)');
+const mobileLayout = matchMedia('(max-width: 84rem)');
 const navGroups = [...nav.querySelectorAll('details')];
 
 function setMenu(open) {
@@ -68,30 +68,126 @@ document.addEventListener('click', event => {
   if (!nav.contains(event.target)) closeGroups();
 });
 
-const cards = document.querySelector('#service-cards');
-const controls = document.querySelector('.carousel-controls');
-const [previous, next] = controls.querySelectorAll('button');
+const pestField = document.querySelector('#pest');
+let suggestedPest = '';
+pestField.addEventListener('change', () => { suggestedPest = ''; });
+document.querySelector('#services').addEventListener('click', event => {
+  const link = event.target.closest('[data-pest]');
+  if (link && (!pestField.value || pestField.value === suggestedPest)) {
+    suggestedPest = link.dataset.pest;
+    pestField.value = suggestedPest;
+  }
+});
+
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
-function updateCarousel() {
-  const end = cards.scrollWidth - cards.clientWidth;
-  controls.hidden = end <= 2;
-  previous.setAttribute('aria-disabled', String(cards.scrollLeft <= 2));
-  next.setAttribute('aria-disabled', String(cards.scrollLeft >= end - 2));
+const serviceMarquee = document.querySelector('.service-marquee');
+const serviceList = serviceMarquee.querySelector('.service-cards');
+const serviceCopy = serviceList.cloneNode(true);
+const marqueeToggle = document.querySelector('.service-marquee-toggle');
+serviceCopy.hidden = true;
+serviceCopy.setAttribute('aria-hidden', 'true');
+serviceCopy.querySelectorAll('a').forEach(link => { link.tabIndex = -1; });
+serviceCopy.addEventListener('mousedown', event => {
+  if (event.button === 0) event.preventDefault();
+});
+serviceList.after(serviceCopy);
+
+let marqueePaused = false;
+let marqueeHovered = false;
+let marqueeFocused = false;
+let marqueeVisible = !('IntersectionObserver' in window);
+let marqueeFrame = 0;
+let previousFrame = null;
+let marqueeOffset = 0;
+let marqueeCycle = 0;
+
+function advanceMarquee(time) {
+  if (previousFrame !== null) {
+    const elapsed = Math.min(time - previousFrame, 50);
+    marqueeOffset = (marqueeOffset + elapsed * .045) % marqueeCycle;
+    serviceMarquee.scrollLeft = marqueeOffset;
+  }
+  previousFrame = time;
+  marqueeFrame = requestAnimationFrame(advanceMarquee);
 }
 
-controls.addEventListener('click', event => {
-  const button = event.target.closest('button');
-  if (!button || button.getAttribute('aria-disabled') === 'true') return;
-  const step = cards.children[1].offsetLeft - cards.children[0].offsetLeft;
-  cards.scrollBy({
-    left: step * Number(button.dataset.step),
-    behavior: reducedMotion.matches ? 'instant' : 'smooth'
+function updateMarquee() {
+  const playing = marqueeVisible && !reducedMotion.matches && marqueeCycle > 0
+    && !marqueePaused && !marqueeHovered && !marqueeFocused;
+  if (playing && !marqueeFrame) {
+    marqueeOffset = serviceMarquee.scrollLeft;
+    marqueeFrame = requestAnimationFrame(advanceMarquee);
+  } else if (!playing && marqueeFrame) {
+    cancelAnimationFrame(marqueeFrame);
+    marqueeFrame = 0;
+    previousFrame = null;
+  }
+}
+
+function measureMarquee() {
+  marqueeCycle = serviceCopy.hidden ? 0 : serviceCopy.getBoundingClientRect().left - serviceList.getBoundingClientRect().left;
+  updateMarquee();
+}
+
+function updateMarqueeMotion() {
+  serviceCopy.hidden = reducedMotion.matches;
+  marqueeToggle.hidden = reducedMotion.matches;
+  measureMarquee();
+}
+
+function setMarqueePaused(paused) {
+  marqueePaused = paused;
+  marqueeToggle.textContent = paused ? 'Resume' : 'Pause';
+  updateMarquee();
+}
+
+marqueeToggle.addEventListener('click', () => setMarqueePaused(!marqueePaused));
+serviceMarquee.addEventListener('pointerenter', event => {
+  marqueeHovered = event.pointerType !== 'touch';
+  updateMarquee();
+});
+serviceMarquee.addEventListener('pointerleave', () => {
+  marqueeHovered = false;
+  updateMarquee();
+});
+serviceMarquee.addEventListener('pointerdown', event => {
+  if (event.pointerType === 'touch') setMarqueePaused(true);
+});
+serviceMarquee.addEventListener('focusin', () => {
+  marqueeFocused = true;
+  updateMarquee();
+});
+serviceMarquee.addEventListener('focusout', event => {
+  marqueeFocused = serviceMarquee.contains(event.relatedTarget);
+  updateMarquee();
+});
+window.addEventListener('resize', measureMarquee);
+reducedMotion.addEventListener('change', updateMarqueeMotion);
+if ('IntersectionObserver' in window) {
+  const marqueeObserver = new IntersectionObserver(([entry]) => {
+    marqueeVisible = entry.isIntersecting;
+    updateMarquee();
+  });
+  marqueeObserver.observe(serviceMarquee);
+}
+updateMarqueeMotion();
+
+const reviewControls = document.querySelector('.review-controls');
+const reviewButtons = [...reviewControls.querySelectorAll('button')];
+const testimonials = reviewButtons.map(button => document.getElementById(button.getAttribute('aria-controls')));
+
+reviewControls.addEventListener('click', event => {
+  const selectedIndex = reviewButtons.indexOf(event.target);
+  if (selectedIndex === -1) return;
+
+  reviewButtons.forEach((button, index) => {
+    const selected = index === selectedIndex;
+    button.setAttribute('aria-pressed', String(selected));
+    testimonials[index].hidden = !selected;
   });
 });
-cards.addEventListener('scroll', updateCarousel, { passive: true });
-new ResizeObserver(updateCarousel).observe(cards);
-updateCarousel();
+reviewControls.hidden = false;
 
 const requiredTextFields = document.querySelectorAll('.contact-form input[required]:not([type])');
 requiredTextFields.forEach(field => {
@@ -116,3 +212,34 @@ document.querySelectorAll('form[data-netlify]').forEach(form => {
     status.textContent = 'Form submission is unavailable on this preview. For service, call (781) 333-1998.';
   });
 });
+
+const revealTargets = document.querySelectorAll('[data-reveal]');
+
+if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const target = entry.target;
+      revealObserver.unobserve(target);
+      if (target.contains(document.activeElement)) continue;
+
+      target.classList.add('reveal-in');
+    }
+  }, { rootMargin: '0px 0px 12px' });
+
+  revealTargets.forEach(target => revealObserver.observe(target));
+
+  // A keyboard user can interact with a card immediately, even mid-reveal.
+  document.addEventListener('focusin', event => {
+    const target = event.target.closest('[data-reveal]');
+    if (!target) return;
+    revealObserver.unobserve(target);
+    target.classList.remove('reveal-in');
+  });
+
+  reducedMotion.addEventListener('change', event => {
+    if (!event.matches) return;
+    revealObserver.disconnect();
+    revealTargets.forEach(target => target.classList.remove('reveal-in'));
+  });
+}

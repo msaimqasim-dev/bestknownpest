@@ -1,0 +1,59 @@
+.hero-line { display: block; }
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    --reveal-distance: 1rem;
+    --reveal-ease: cubic-bezier(0, 0, .3, 1);
+  }
+
+  .hero-line { overflow: clip; }
+  .hero-line > span {
+    display: block;
+    animation: headline-rise 480ms var(--reveal-ease) backwards;
+  }
+  .hero-line:nth-child(2) > span { animation-delay: 70ms; }
+  .hero-line:nth-child(3) > span { animation-delay: 140ms; }
+
+  /* Content has its normal appearance until the observer starts a reveal. */
+  .reveal-in {
+    animation: fade-rise 420ms var(--reveal-ease) backwards;
+  }
+  .owner-photo.reveal-in { animation: portrait-reveal 600ms var(--reveal-ease) backwards; }
+  .reveal-in[data-reveal="group"] { animation: group-rise 320ms var(--reveal-ease) backwards; }
+  .reveal-in[data-reveal="map"] { animation-duration: 760ms; }
+
+  .button { transition: background-color 150ms ease, transform 150ms ease; }
+  .button:active { transform: translateY(1px); }
+  .service-card-link,
+  .service-card-action { transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease; }
+  .service-card-link { transition-property: background-color, color, border-color, translate; }
+  .service-card p { transition: color 250ms ease; }
+  .service-card:hover .service-card-link,
+  .service-card-link:focus-visible { translate: 0 -.25rem; }
+  .faq summary::before { transition: transform 180ms var(--reveal-ease); }
+  .faq summary::after { transition: background-color 180ms ease; }
+
+  @media (max-width: 42rem) {
+    :root { --reveal-distance: .625rem; }
+  }
+}
+
+@keyframes headline-rise {
+  from { transform: translateY(105%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes fade-rise {
+  from { opacity: 0; transform: translateY(var(--reveal-distance)); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes portrait-reveal {
+  from { clip-path: inset(100% 0 0); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes group-rise {
+  from { opacity: .8; transform: translateY(calc(var(--reveal-distance) / 2)); }
+  to { opacity: 1; transform: translateY(0); }
+}
