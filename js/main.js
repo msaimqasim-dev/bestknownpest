@@ -1,7 +1,37 @@
 const menuButton = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#primary-nav');
 const mobileLayout = matchMedia('(max-width: 84rem)');
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const navGroups = [...nav.querySelectorAll('details')];
+const siteHeader = document.querySelector('.site-header');
+const headerSlot = document.querySelector('.site-header-slot');
+let headerScrollFrame = 0;
+let headerWidthAnimation;
+
+function updateStickyHeader() {
+  headerScrollFrame = 0;
+  const { top, height } = headerSlot.getBoundingClientRect();
+  const inset = parseFloat(getComputedStyle(siteHeader).getPropertyValue('--sticky-header-inset'));
+  const sticky = top <= inset;
+  if (sticky === siteHeader.classList.contains('is-sticky')) return;
+
+  const startWidth = siteHeader.getBoundingClientRect().width;
+  headerWidthAnimation?.cancel();
+  // Reserve the navbar's original space when it leaves the hero's grid.
+  headerSlot.style.blockSize = sticky ? `${height}px` : '';
+  siteHeader.classList.toggle('is-sticky', sticky);
+
+  if (reducedMotion.matches || typeof siteHeader.animate !== 'function') return;
+  const endWidth = siteHeader.getBoundingClientRect().width;
+  headerWidthAnimation = siteHeader.animate(
+    [{ width: `${startWidth}px` }, { width: `${endWidth}px` }],
+    { duration: 280, easing: 'cubic-bezier(.2, .65, .3, 1)' }
+  );
+}
+
+function scheduleStickyHeader() {
+  if (!headerScrollFrame) headerScrollFrame = requestAnimationFrame(updateStickyHeader);
+}
 
 function setMenu(open) {
   const mobile = mobileLayout.matches;
@@ -17,6 +47,18 @@ function closeGroups(except) {
 }
 
 setMenu(false);
+updateStickyHeader();
+window.addEventListener('scroll', scheduleStickyHeader, { passive: true });
+window.addEventListener('resize', () => {
+  headerWidthAnimation?.cancel();
+  if (siteHeader.classList.contains('is-sticky') && (nav.hidden || !mobileLayout.matches)) {
+    headerSlot.style.blockSize = `${siteHeader.getBoundingClientRect().height}px`;
+  }
+  scheduleStickyHeader();
+});
+reducedMotion.addEventListener('change', event => {
+  if (event.matches) headerWidthAnimation?.cancel();
+});
 mobileLayout.addEventListener('change', () => {
   const focusedNav = nav.contains(document.activeElement);
   const focusedButton = document.activeElement === menuButton;
@@ -78,8 +120,6 @@ document.querySelector('#services').addEventListener('click', event => {
     pestField.value = suggestedPest;
   }
 });
-
-const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
 const serviceMarquee = document.querySelector('.service-marquee');
 const serviceList = serviceMarquee.querySelector('.service-cards');

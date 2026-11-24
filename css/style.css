@@ -1,6 +1,10 @@
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-padding-top: 1.25rem; }
+html {
+  --header-bar-height: 3.5rem;
+  --sticky-header-inset: 16px;
+  scroll-padding-top: calc(var(--header-bar-height) + var(--sticky-header-inset) + 1.25rem);
+}
 body {
   margin: 0;
   color: var(--ink);
@@ -72,26 +76,37 @@ ul { padding: 0; margin: 0; list-style: none; }
 
 /* The hero image and gradient share the same background layers. */
 .hero {
+  --hero-inset: clamp(1.25rem, 2.35vw, 2.25rem);
   display: grid;
   grid-template-rows: auto 1fr;
-  min-height: clamp(36rem, 48.5vw, 41.25rem);
-  padding: 1rem clamp(1.25rem, 2.35vw, 2.25rem) 1.75rem;
+  min-height: clamp(36rem, 82svh, 58rem);
+  padding: 1rem var(--hero-inset) 1.75rem;
   border-radius: var(--radius);
   color: var(--paper);
   background: linear-gradient(90deg, rgb(9 22 4 / 77%), rgb(10 23 3 / 20%) 68%, rgb(10 23 3 / 6%)),
     #28450d url("../assets/images/hero-caterpillar.jpg") center / cover no-repeat;
 }
+.site-header-slot { min-width: 0; }
 .site-header {
   position: relative;
+  left: 50%;
+  translate: -50% 0;
   z-index: 2;
   display: flex;
   align-items: center;
   gap: .875rem;
-  min-height: 3.5rem;
+  min-height: var(--header-bar-height);
   padding: .3125rem .875rem;
   border: 1px solid rgb(255 255 255 / 48%);
   border-radius: .55rem;
   background: var(--brand-dark);
+}
+.site-header.is-sticky {
+  position: fixed;
+  z-index: 9;
+  inset: var(--sticky-header-inset) auto auto 50%;
+  width: calc(min(100%, var(--content-width)) - 2 * var(--gutter));
+  box-shadow: 0 .25rem 1rem rgb(23 23 23 / 14%);
 }
 .brand {
   display: inline-flex;
